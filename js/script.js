@@ -1,8 +1,7 @@
 /** Global constants */
-const CALENDAR_BUTTON_ELEMENT = document.querySelectorAll('.main-card-calendar-button'),
+const MENU_ELEMENTS = document.querySelectorAll('.main-card-menu-button'),
       CARD = document.querySelectorAll('.card-details-panel-activity'),
-      DATABASE = "../data.json";
-    
+      DATABASE = "./data.json";
 
 
 /** Functions */
@@ -14,27 +13,30 @@ const CALENDAR_BUTTON_ELEMENT = document.querySelectorAll('.main-card-calendar-b
 async function getData(database){
     let response = await fetch(database);
     let data = await response.json();
-    populateDOM(data);
+    routeDataToMenu(data);
 }
 
-getData(DATABASE);
+/** Get data once the document has loaded */
+document.activeElement('load', ()=>{
+    getData(DATABASE);
+})
 
 /**
- * 
+ * This function sends the data to the menu to be populated based on the active state of ech menu
  * @param {object} data - Parameter to receive data as a JavaScript object
  */
-function populateDOM(data){
-    CALENDAR_BUTTON_ELEMENT.forEach(buttonElement =>{
-        if(buttonElement.classList.contains('main-card-calendar-button-active')){
+function routeDataToMenu(data){
+    MENU_ELEMENTS.forEach(buttonElement =>{
+        if(buttonElement.classList.contains('main-card-menu-button-active')){
             switch(buttonElement.innerText){
                 case "Daily":
-                    populateDaily(data);
+                    populateDailyMenu(data);
                     break;
                 case "Weekly":
-                    populateWeekly(data);
+                    populateWeeklyMenu(data);
                     break;
                 case "Monthly":
-                    populateMonthly(data);
+                    populateMonthlyMenu(data);
                     break;
                 default:
                     console.error("Missing active class");
@@ -44,216 +46,156 @@ function populateDOM(data){
     })
 }
 
+/**
+ * This function populates the daily menu
+ * @param {object} data - Parameter to receive data as a JavaScript object
+ */
+function populateDailyMenu(data){
+    routeDataToCard(data, "daily");
+}
 
-function populateDaily(data){
+/**
+ * This function populates the weekly menu
+ * @param {object} data - Parameter to receive data as a JavaScript object
+ */
+function populateWeeklyMenu(data){
+    routeDataToCard(data, "weekly");
+}
+
+/**
+ * This function populates the monthy menu
+ * @param {object} data - Parameter to receive data as a JavaScript object
+ */
+function populateMonthlyMenu(data){
+   routeDataToCard(data, "monthly");
+}
+
+/**
+ * This functions sends data to the appropriate card based on conditions
+ * @param {object} data - Parameter to receive data as a JavaScript object
+ */
+function routeDataToCard(data, menu){
     data.forEach(item =>{
-        /**Populate work card */
-        if (item.title === "Work"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Work"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-        /**Populate play card */
-        if (item.title === "Play"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Play"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-        /**Populate study card */
-        if (item.title === "Study"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Study"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-        /**Populate exercise card */
-        if (item.title === "Exercise"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Exercise"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-        /**Populate social card */
-        if (item.title === "Social"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Social"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-        /**Populate self care card */
-        if (item.title === "Self Care"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Self Care"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.daily.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.daily.previous}hrs`;
-                }
-            })
-        }
-
+        switch(item.title){
+            /**Populate work card */
+            case "Work":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Work"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            /**Populate play card */
+            case "Play":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Play"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            /**Populate study card */
+            case "Study":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Study"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            /**Populate exercise card */
+            case "Exercise":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Exercise"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            /**Populate social card */
+            case "Social":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Social"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            /**Populate self care card */
+            case "Self Care":
+                CARD.forEach(card =>{
+                    if (card.innerText === "Self Care"){
+                        populateDOM(card, menu, item);
+                    }
+                })
+                break;
+            default:
+                console.error("Card is missing");
+                break;
+        } 
     })
 }
 
+/**
+ * This function populates the DOM with appropriate data
+ * @param {string} card - Each card on the DOM
+ * @param {string} menu - The menu that is active
+ * @param {string} item - Each item to populate the cards on the DOM
+ */
+function populateDOM(card, menu, item){
+    /** Rename DOM traversal item to human readable language */
+    let cardTime = card.parentElement.nextElementSibling.children[0], 
+        itemTime = item.timeframes[menu].current, 
+        cardDate = card.parentElement.nextElementSibling.children[1], 
+        itemDate = item.timeframes[menu].previous;
 
-function populateWeekly(data){
-    data.forEach(item =>{
-        /**Populate work card */
-        if (item.title === "Work"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Work"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate play card */
-        if (item.title === "Play"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Play"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate study card */
-        if (item.title === "Study"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Study"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate exercise card */
-        if (item.title === "Exercise"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Exercise"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate social card */
-        if (item.title === "Social"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Social"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate self care card */
-        if (item.title === "Self Care"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Self Care"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.weekly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.weekly.previous}hrs`;
-                }
-            })
-        }
-    })
+    /** Validate for grammatical errors */
+    if (itemTime <= 1){
+        cardTime.innerText = `${itemTime}hr`;
+    } else{
+        cardTime.innerText = `${itemTime}hrs`;
+    } if (itemDate <=1){
+        cardDate.innerText = `Previous - ${itemDate}hr`;
+    } else{
+        cardDate.innerText = `Previous - ${itemDate}hrs`;
+    }
 }
 
-function populateMonthly(data){
-    data.forEach(item =>{
-        /**Populate work card */
-        if (item.title === "Work"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Work"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate play card */
-        if (item.title === "Play"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Play"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate study card */
-        if (item.title === "Study"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Study"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate exercise card */
-        if (item.title === "Exercise"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Exercise"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate social card */
-        if (item.title === "Social"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Social"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-        /**Populate self care card */
-        if (item.title === "Self Care"){
-            CARD.forEach(card =>{
-                if (card.innerText === "Self Care"){
-                    card.parentElement.nextElementSibling.children[0].innerText = `${item.timeframes.monthly.current}hrs`;
-                    card.parentElement.nextElementSibling.children[1].innerText = `Previous - ${item.timeframes.monthly.previous}hrs`;
-                }
-            })
-        }
-    })
-}
-
-
-
-
+/**
+ * This function switches menu between active and inactive states
+ * @param {string} event 
+ */
 function switchActiveState(event){
     addActiveState(event.target);
     removeActiveState();
 }
 
-function addActiveState(calendar){
-    if (!calendar.classList.contains('main-card-calendar-button-active')){
-        calendar.classList.add('main-card-calendar-button-active');
-        localStorage.setItem('currentCalendar', calendar.innerText);
+/**
+ * This function adds active state to a menu when it is clicke
+ * @param {string} menu - The menu clikcked
+ */
+function addActiveState(menu){
+    if (!menu.classList.contains('main-card-menu-button-active')){
+        menu.classList.add('main-card-menu-button-active');
+        localStorage.setItem('currentCalendar', menu.innerText);
     }
 }
 
+/**
+ * This function removes active state from a menu when another menu is clicked
+ */
 function removeActiveState(){
-    CALENDAR_BUTTON_ELEMENT.forEach(buttonElement =>{
+    MENU_ELEMENTS.forEach(buttonElement =>{
         if (buttonElement.innerText !== localStorage.getItem('currentCalendar')){
-            buttonElement.classList.remove('main-card-calendar-button-active');
+            buttonElement.classList.remove('main-card-menu-button-active');
         }
     })
 }
 
 
-
-
 /** Listeners */
-CALENDAR_BUTTON_ELEMENT.forEach(buttonElement =>{
+
+/** Swicth state and display data based on the menu clicked */
+MENU_ELEMENTS.forEach(buttonElement =>{
     buttonElement.addEventListener('click', event =>{
         switchActiveState(event);
         getData(DATABASE);
     });
 })
+    

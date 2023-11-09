@@ -1,0 +1,365 @@
+/* Global CSS styles */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary-blue: hsl(246, 80%, 60%);
+    --color-primary-light-red-work: hsl(15, 100%, 70%);
+    --color-primary-soft-blue-play: hsl(195, 74%, 62%);
+    --color-primary-light-red-study: hsl(348, 100%, 68%);
+    --color-primary-lime-green-exercise: hsl(145, 58%, 55%);
+    --color-primary-violet-social: hsl(264, 64%, 52%);
+    --color-primary-soft-orange-selfcare: hsl(43, 84%, 65%);
+    --color-white: #ffffff;
+    --color-transparent: transparent;
+    --color-neutral-very-dark-blue: hsl(226, 43%, 10%);
+    --color-neutral-dark-blue: hsl(235, 46%, 20%);
+    --color-neutral-desaturated-blue: hsl(235, 45%, 61%);
+    --color-neutral-pale-blue: hsl(236, 100%, 87%);
+    --default-font-size: 16px;
+    --rubik-font-family: 'Rubik', sans-serif;
+
+}
+
+html {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-neutral-very-dark-blue);
+    color: var(--color-white);
+    font-family: var(--rubik-font-family);
+    font-size: var(--default-font-size);
+}
+
+button {
+    font-family: inherit;
+    border: 0;
+    background-color: var(--color-transparent);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button img {
+    vertical-align: middle;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Main container section */
+.main-container {
+    display: grid;
+    position: relative;
+    gap: 1rem;
+    padding: 4rem 1rem;
+}
+
+.main-container-wrapper {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Main card section */
+.main-card-cover-bg {
+    background-color: var(--color-neutral-very-dark-blue);
+    height: 100px;
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+}
+
+.main-card {
+    background-color: var(--color-neutral-dark-blue);
+    border-radius: 10px;
+    position: sticky;
+    inset: 64px 0 0 0;
+    z-index: 3;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 15px 25px, rgba(0, 0, 0, 0.3) 0px 5px 25px;
+}
+
+.main-card-profile {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--color-primary-blue);
+}
+
+.main-card-profile-img {
+    margin: auto 0;
+    border-radius: 500px;
+    border: 2px solid var(--color-white);
+    width: 40px;
+    height: 40px;
+}
+
+.main-card-profile-details-title {
+    font-size: 0.5rem;
+    color: var(--color-neutral-pale-blue);
+}
+
+.main-card-profile-details-name {
+    font-size: 0.85rem;
+}
+
+.main-card-calendar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: var(--color-neutral-desaturated-blue);
+}
+
+.main-card-calendar-button {
+    font-size: 0.7rem;
+    color: var(--color-neutral-desaturated-blue);
+    transition: all 0.2s ease-in;
+}
+
+.main-card-calendar-button:hover {
+    color: var(--color-white);
+}
+
+.main-card-calendar-button-active {
+    color: var(--color-white);
+}
+
+/* Card section */
+.card-highlight {
+    display: flex;
+    justify-content: flex-end;
+    height: 44px;
+    padding-inline-end: 0.5rem;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-details {
+    display: flex;
+    gap: 0.1rem;
+    flex-direction: column;
+    background-color: var(--color-neutral-dark-blue);
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+    height: fit-content;
+    inset: 0;
+    margin: -20px auto auto auto;
+    border-radius: 10px;
+    transition: all 0.3s ease-in;
+}
+
+.card-details:hover {
+    cursor: pointer;
+    background-color: var(--color-neutral-desaturated-blue);
+}
+
+.card-details-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.card-details-panel-activity {
+    font-weight: 700;
+    font-size: 0.6rem;
+}
+
+.card-details-panel-more-button img {
+    width: 15px;
+    margin: 0 auto;
+}
+
+.card-details-panel-time {
+    font-size: 1.2rem;
+}
+
+.card-details-panel-date {
+    color: var(--color-neutral-pale-blue);
+    font-size: 0.6rem;
+}
+
+/* Highlight background section */
+.work .card-highlight {
+    background-color: var(--color-primary-light-red-work);
+}
+
+.play .card-highlight {
+    background-color: var(--color-primary-soft-blue-play);
+}
+
+.study .card-highlight {
+    background-color: var(--color-primary-light-red-study);
+}
+
+.exercise .card-highlight {
+    background-color: var(--color-primary-lime-green-exercise);
+}
+
+.social .card-highlight {
+    background-color: var(--color-primary-violet-social);
+}
+
+.self-care .card-highlight {
+    background-color: var(--color-primary-soft-orange-selfcare);
+}
+  
+/* Attribution section */
+.attribution { 
+    font-size: 0.6rem; 
+    padding: 2rem 2rem 4rem 2rem;
+    line-height: 1.5;
+    text-align: center; 
+    color: var(--color-neutral-pale-blue); 
+}
+
+.attribution a { 
+    color: var(--color-neutral-desaturated-blue);
+    transition: all 0.3s ease-in;
+}
+
+.attribution a:hover { 
+    color: var(--color-primary-violet-social); 
+}
+
+/* Responsiveness section */
+@media(min-width:330px){
+    .main-container {
+        padding-inline: 2rem;
+    }  
+
+    .main-card-profile {
+        padding-block: 2rem;
+        gap: 1.2rem;
+    }
+
+    .main-card-profile-img {
+        width: 70px;
+        height: 70px;
+        border: 3px solid var(--color-white);
+    }
+
+    .main-card-profile-details-title  {
+        font-size: 0.8rem;
+    }
+
+    .main-card-profile-details-name  {
+        font-size: 1.3rem;
+    }
+
+    .main-card-calendar {
+        padding-block: 1rem;
+    }
+
+    .main-card-calendar-button {
+        font-size: 0.8rem;
+    }
+
+    .card-highlight {
+        height: 60px;
+    }
+
+    .card-details {
+        padding-block: 1.5rem;
+        gap: 0.4rem;
+    }
+
+    .card-details-panel-activity {
+        font-size: 0.8rem;
+    }
+
+    .card-details-panel-more-button img {
+        width: 18px;
+    }
+
+    .card-details-panel-time {
+        font-size: 1.6rem;
+    }
+
+    .card-details-panel-date {
+        font-size: 0.8rem;
+    }
+}
+
+@media(min-width:660px){
+    .main-container-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width:1330px){
+    .main-container {
+        padding-block: 18rem 6rem;
+        grid-template-columns: 1fr 3fr;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    
+    .main-card{
+        box-shadow: none;
+    }
+
+    .main-card-profile {
+        padding: 1.5rem 1.1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .main-card-profile-img {
+        margin: auto 0;
+    }
+
+    .main-card-profile-details-name {
+        font-size: 1.8rem;
+    }
+
+    .main-container-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .main-card-calendar {
+        flex-direction: column;
+        gap: 2rem;
+        padding-block: 2rem;
+    }
+
+    .main-card-calendar-button {
+        width: 100%;
+        text-align: left;
+    }
+
+    .card-details {
+        gap: 1rem;
+    }
+
+    .card-details-panel:nth-of-type(2) {
+        gap: 0.3rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-details-panel-time {
+        font-size: 2rem;
+    }
+
+    .card-details-panel-date {
+        font-size: 0.6rem;
+    }
+}

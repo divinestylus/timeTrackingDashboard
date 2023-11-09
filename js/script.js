@@ -17,7 +17,7 @@ async function getData(database){
 }
 
 /** Get data once the document has loaded */
-document.activeElement('load', ()=>{
+document.addEventListener('load', ()=>{
     getData(DATABASE);
 })
 

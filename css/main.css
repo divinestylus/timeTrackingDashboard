@@ -119,7 +119,7 @@ a {
     font-size: 0.85rem;
 }
 
-.main-card-calendar {
+.main-card-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -127,17 +127,17 @@ a {
     color: var(--color-neutral-desaturated-blue);
 }
 
-.main-card-calendar-button {
+.main-card-menu-button {
     font-size: 0.7rem;
     color: var(--color-neutral-desaturated-blue);
     transition: all 0.2s ease-in;
 }
 
-.main-card-calendar-button:hover {
+.main-card-menu-button:hover {
     color: var(--color-white);
 }
 
-.main-card-calendar-button-active {
+.main-card-menu-button-active {
     color: var(--color-white);
 }
 
@@ -264,11 +264,11 @@ a {
         font-size: 1.3rem;
     }
 
-    .main-card-calendar {
+    .main-card-menu {
         padding-block: 1rem;
     }
 
-    .main-card-calendar-button {
+    .main-card-menu-button {
         font-size: 0.8rem;
     }
 
@@ -339,15 +339,16 @@ a {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .main-card-calendar {
+    .main-card-menu {
         flex-direction: column;
         gap: 2rem;
         padding-block: 2rem;
     }
 
-    .main-card-calendar-button {
+    .main-card-menu-button {
         width: 100%;
         text-align: left;
+        font-size: 0.8rem;
     }
 
     .card-details {
@@ -365,6 +366,6 @@ a {
     }
 
     .card-details-panel-date {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
 }

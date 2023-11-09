@@ -16,10 +16,8 @@ async function getData(database){
     routeDataToMenu(data);
 }
 
-/** Get data once the document has loaded */
-document.addEventListener('load', ()=>{
-    getData(DATABASE);
-})
+getData(DATABASE);
+
 
 /**
  * This function sends the data to the menu to be populated based on the active state of ech menu
@@ -30,13 +28,13 @@ function routeDataToMenu(data){
         if(buttonElement.classList.contains('main-card-menu-button-active')){
             switch(buttonElement.innerText){
                 case "Daily":
-                    populateDailyMenu(data);
+                    routeDataToCard(data, buttonElement.innerText.toLowerCase());
                     break;
                 case "Weekly":
-                    populateWeeklyMenu(data);
+                    routeDataToCard(data, buttonElement.innerText.toLowerCase());
                     break;
                 case "Monthly":
-                    populateMonthlyMenu(data);
+                    routeDataToCard(data, buttonElement.innerText.toLowerCase());
                     break;
                 default:
                     console.error("Missing active class");
@@ -46,29 +44,6 @@ function routeDataToMenu(data){
     })
 }
 
-/**
- * This function populates the daily menu
- * @param {object} data - Parameter to receive data as a JavaScript object
- */
-function populateDailyMenu(data){
-    routeDataToCard(data, "daily");
-}
-
-/**
- * This function populates the weekly menu
- * @param {object} data - Parameter to receive data as a JavaScript object
- */
-function populateWeeklyMenu(data){
-    routeDataToCard(data, "weekly");
-}
-
-/**
- * This function populates the monthy menu
- * @param {object} data - Parameter to receive data as a JavaScript object
- */
-function populateMonthlyMenu(data){
-   routeDataToCard(data, "monthly");
-}
 
 /**
  * This functions sends data to the appropriate card based on conditions
